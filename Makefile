@@ -8,6 +8,7 @@ export PATH := $(GOROOT)/bin:$(GOPATH)/bin:$(PATH)
 
 default:
 	@go run demo.go
+	@go run server.go
 
 fmt:
 	@go fmt *.go

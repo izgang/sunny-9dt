@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"html/template"
 	"os"
 	"strings"
 )
@@ -68,7 +69,9 @@ func ParseDml3(filepath string) []Sentence {
 
 func main() {
 	sentences := ParseDml3("9dt/台語世界 九重天 鄭邦鎮 1997.dml3")
-	for _, s := range sentences {
-		fmt.Println(s)
-	}
+
+	t := template.Must(template.ParseFiles("index.tpml"))
+	fo, _ := os.Create("output/index.html")
+	defer fo.Close()
+	t.Execute(fo, sentences)
 }
