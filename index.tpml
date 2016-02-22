@@ -3,18 +3,39 @@
 <head>
   <meta charset="utf-8">
   <title>Demo 9dt</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <style>
+    span.glyphicon-volume-up {cursor:pointer;}
+  </style>
 </head>
 <body>
 
 {{range $sentence := .}}
-<div class="sentence">
-  <div>{{$sentence.Wm}}</div>
-  <div>{{$sentence.Hvg}}</div>
-  <div>{{$sentence.Hv}}</div>
-  <div>{{$sentence.Dv}}</div>
-  <div>{{$sentence.Di}}</div>
-</div>
+<ul class="list-group">
+  <li class="list-group-item">{{$sentence.Hvg}}</li>
+  <li class="list-group-item">{{$sentence.Hv}}</li>
+  <li class="list-group-item">{{$sentence.Dv}}</li>
+  <li class="list-group-item">
+    <span class="glyphicon glyphicon-volume-up" aria-hidden="true" onclick="playmp3('{{$sentence.Wm}}')"></span>
+    {{$sentence.Di}}
+  </li>
+</ul>
+<audio id="{{$sentence.Wm}}">
+  <source src="{{$sentence.Wm}}" type="audio/mpeg">
+Your browser does not support this audio format.
+</audio>
 {{end}}
 
+<script>
+function playmp3(id) {
+  var audioElem = document.getElementById(id);
+  if (audioElem.paused) {
+    audioElem.play();
+  } else {
+    audioElem.pause();
+  }
+}
+</script>
 </body>
 </html>

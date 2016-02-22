@@ -42,7 +42,7 @@ func ParseDml3(filepath string) []Sentence {
 	for _, line := range lines {
 		if strings.HasPrefix(line, ".wm.") {
 			s := Sentence{}
-			s.Wm = line[4:]
+			s.Wm = strings.TrimSpace(line[4:]) + ".mp3"
 			sentences = append(sentences, s)
 			continue
 		}
